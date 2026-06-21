@@ -1,5 +1,5 @@
 ##########################
-## Azure Linux - Output ##
+## Azure Debian VM - Output ##
 ##########################
 
 output "linux_vm_name" {

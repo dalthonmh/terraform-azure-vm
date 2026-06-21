@@ -9,10 +9,10 @@ location    = "northeurope"
 ##################
 # Authentication #
 ##################
-azure-tenant-id       = "complete-this"
-azure-subscription-id = "complete-this"
-azure-client-id       = "complete-this"
-azure-client-secret   = "complete-this"
+azure-tenant-id       = ""
+azure-subscription-id = ""
+azure-client-id       = ""
+azure-client-secret   = ""
 
 ###########
 # Network #

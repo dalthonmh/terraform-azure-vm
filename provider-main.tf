@@ -4,12 +4,24 @@
 
 # Define Terraform provider
 terraform {
-  required_version = "~> 1.0"
+  # required_version = "~> 1.15"
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.0"
+    }
+  }
 }
 
 # Configure the Azure provider
-provider "azurerm" { 
-  features {}  
+provider "azurerm" {
+  features {}
+
   environment     = "public"
   subscription_id = var.azure-subscription-id
   client_id       = var.azure-client-id
