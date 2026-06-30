@@ -18,21 +18,45 @@ This project provisions:
 
 ## Authentication
 
-The configuration uses service principal credentials via variables.
+The easiest way to authenticate is with `az login` (recommended for local development).
 
-1. Create a service principal (or use your own):
+### Option 1: Azure CLI (simplest for interactive use)
+
+1. Log in to Azure:
+
+   ```bash
+   az login
+   ```
+
+2. (Optional) List your subscriptions and select the one you want:
+
+   ```bash
+   az account list --output table
+   az account set --subscription "<SUBSCRIPTION_ID or NAME>"
+   ```
+
+3. Leave the authentication variables empty in `terraform.tfvars` (or don't set them at all).  
+   Terraform will automatically use your logged-in Azure CLI session.
+
+That's it — no need to create service principals or fill secrets for local work.
+
+### Option 2: Service Principal (for CI/CD or automation)
+
+Only use this if you need non-interactive authentication (pipelines, GitHub Actions, etc.).
+
+1. Create a service principal:
 
    ```bash
    az ad sp create-for-rbac --name tf-sp --role Contributor --scopes /subscriptions/<SUBSCRIPTION_ID>
    ```
 
-2. Fill in the values in `terraform.tfvars`:
+2. Fill the values in `terraform.tfvars`:
    - `azure-tenant-id`
    - `azure-subscription-id`
    - `azure-client-id`
    - `azure-client-secret`
 
-Alternative (recommended for interactive use): use `az login` and authenticate via the Azure provider (remove or comment the explicit credentials and let the provider use CLI / Managed Identity).
+The project supports both methods. When the credential variables are empty, the Azure provider falls back to Azure CLI / Managed Identity.
 
 ## Usage
 

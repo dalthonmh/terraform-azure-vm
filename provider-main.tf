@@ -22,9 +22,12 @@ terraform {
 provider "azurerm" {
   features {}
 
-  environment     = "public"
-  subscription_id = var.azure-subscription-id
-  client_id       = var.azure-client-id
-  client_secret   = var.azure-client-secret
-  tenant_id       = var.azure-tenant-id
+  environment = "public"
+
+  # Only use explicit credentials when provided (service principal / automation).
+  # Leave empty to authenticate via Azure CLI (`az login`), Managed Identity, or environment.
+  subscription_id = var.azure-subscription-id != "" ? var.azure-subscription-id : null
+  client_id       = var.azure-client-id != "" ? var.azure-client-id : null
+  client_secret   = var.azure-client-secret != "" ? var.azure-client-secret : null
+  tenant_id       = var.azure-tenant-id != "" ? var.azure-tenant-id : null
 }

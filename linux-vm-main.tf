@@ -10,7 +10,7 @@ resource "random_password" "linux-vm-password" {
   min_special      = 2
   numeric          = true
   special          = true
-  override_special = "!@#$%&"
+  override_special = "!@#$&"
 }
 
 # Generate a random vm name
